@@ -2,123 +2,86 @@
 import React, { useState } from "react";
 import Transcript from "./Transcript";
 import Summary from "./Summary";
-import MindMap from "./MindMap";
-import transcript from "../components/transcript.json";
-import Image from "next/image";
-import federer from "../public/federer.jpeg";
-export default function Home() {
+
+export default function VideoPlayer() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSummary, setIsSummary] = useState(false);
 
   const toggleTranscript = () => {
     setIsExpanded(!isExpanded);
+    if (!isExpanded) setIsSummary(false);
   };
   const toggleSummary = () => {
     setIsSummary(!isSummary);
+    if (!isSummary) setIsExpanded(false);
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex flex-row justify-between">
-        <h1 className="text-4xl font-bold mb-4">
-          CodeCraft: Champion Mindset - Drawing Inspiration from Roger Federer
-          Speech
-        </h1>
-        <Image src={federer} alt={""} width={80} height={80} />
-      </div>
-      <h2 className="text-2xl">
-        While coding may seem worlds apart from professional tennis, there are
-        indeed parallels in terms of mindset, skills, and values that contribute
-        to success and excellence in both domains.
-      </h2>
-      <hr className="my-4 p-2" />
-      <h1 className="my-4 p-2">
-        1.Preparation and Practice: Coding also requires consistent practice and
-        learning. Both endeavors demand dedication to honing skills and
-        mastering techniques over time.{" "}
-      </h1>
-      <h1 className="my-4 p-2">
-        2.Continuous Improvement: There is always something new to learn,
-        whether it is mastering a new language feature, adopting a new
-        framework, or improving problem-solving skills.
-      </h1>
-      <h1 className="my-4 p-2">
-        3.Adaptability: Much like how coders need to adapt their approach to
-        different projects, requirements, and technologies. Mental Discipline:
-        Both coding and tennis require mental discipline. Just as Federer needs
-        focus and concentration during a match, coders need to stay focused when
-        writing complex algorithms, debugging code, or designing software
-        architecture.
-      </h1>
-      <h1 className="my-4 p-2">
-        4.Handling Challenges: Similarly, coders face challenges such as
-        debugging errors, optimizing performance, and meeting deadlines. Both
-        require resilience and the ability to bounce back from failures.
-        Creativity: Coding involves creative problem-solving, where developers
-        come up with elegant solutions to complex problems and create
-        user-friendly interfaces.{" "}
-      </h1>
-      <h1 className="my-4 p-2">
-        5.Teamwork and Collaboration: While tennis may seem like an individual
-        sport, Similarly,coding often involves collaboration with teammates,
-        whether it is pair programming, code reviews, or working in
-        cross-functional teams.
-      </h1>
-      <h1 className="my-4 p-2">
-        6.Legacy and Impact: Many coders aspire to leave a positive impact
-        through their work, whether it is building software that improves
-        peoples lives, contributes to open-source projects, or mentors the next
-        generation of developers.
-      </h1>
-      <h1 className="text-2xl p-2">
-        Listen to the inspiring speech delivered by Roger Federer at Dartmouth.
-      </h1>
-      <div className="video-container mb-4">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/pqWUuYTcG-o"
-          title="Roger Federer's Speech"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
-      <MindMap data={transcript} />
-      <div className="flex flex-col justify-between">
-        <div className="transcript">
-          <h2 className="text-2xl font-semibold mb-2"> Transcript</h2>
-          <button
-            onClick={toggleTranscript}
-            className="mb-2 px-4 py-2 bg-green-700 text-white rounded"
-          >
-            {isExpanded ? "Hide Transcript" : "Show Transcript"}
-          </button>
-          <div
-            className={`transition-all duration-500 ease-in-out ${
-              isExpanded ? "max-h-screen" : "max-h-0 overflow-hidden"
-            }`}
-          >
-            <Transcript />
+    <div className="max-w-4xl mx-auto px-6">
+      <div className="flex flex-col gap-10">
+        {/* Compact Video Window */}
+        <div className="relative group">
+          <div className="absolute -inset-4 bg-[var(--secondary)]/10 rounded-[1.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="relative aspect-video rounded-xl overflow-hidden border border-black/5 shadow-xl bg-black max-w-2xl mx-auto">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/pqWUuYTcG-o"
+              title="Roger Federer's Speech"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
           </div>
         </div>
-        {!isExpanded ? (
-          <div className="transcript">
-            <h2 className="text-2xl font-semibold mb-2">Main Ideas</h2>
+
+        {/* Minimalist Controls */}
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-wrap gap-4 justify-center">
             <button
-              onClick={toggleSummary}
-              className="mb-2 px-4 py-2 bg-green-700 text-white rounded"
-            >
-              {isSummary ? "Hide Main Ideas" : "Show Main Ideas"}
-            </button>
-            <div
-              className={`transition-all duration-500 ease-in-out ${
-                isSummary ? "max-h-screen" : "max-h-0 overflow-hidden"
+              onClick={toggleTranscript}
+              className={`px-6 py-3 rounded-md font-sans uppercase tracking-[0.2em] text-[10px] transition-all duration-500 border ${
+                isExpanded 
+                  ? "bg-black text-white border-black" 
+                  : "bg-transparent text-black border-black/10 hover:border-black"
               }`}
             >
-              <Summary />
+              {isExpanded ? "Close Archive" : "Archival Transcript"}
+            </button>
+            <button
+              onClick={toggleSummary}
+              className={`px-6 py-3 rounded-md font-sans uppercase tracking-[0.2em] text-[10px] transition-all duration-500 border ${
+                isSummary 
+                  ? "bg-black text-white border-black" 
+                  : "bg-transparent text-black border-black/10 hover:border-black"
+              }`}
+            >
+              {isSummary ? "Close Insights" : "Key Lessons"}
+            </button>
+          </div>
+
+          <div className="relative">
+            <div
+              className={`transition-all duration-700 ease-in-out overflow-hidden ${
+                isExpanded ? "opacity-100 max-h-[1500px] mt-6" : "opacity-0 max-h-0"
+              }`}
+            >
+              <div className="p-8 md:p-10 rounded-lg bg-white border border-black/5 shadow-sm">
+                 <Transcript />
+              </div>
+            </div>
+
+            <div
+              className={`transition-all duration-700 ease-in-out overflow-hidden ${
+                isSummary ? "opacity-100 max-h-[1500px] mt-6" : "opacity-0 max-h-0"
+              }`}
+            >
+              <div className="p-8 md:p-10 rounded-lg bg-white border border-black/5 shadow-sm">
+                <Summary />
+              </div>
             </div>
           </div>
-        ) : null}
+        </div>
       </div>
     </div>
   );
