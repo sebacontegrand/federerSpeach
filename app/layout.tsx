@@ -11,6 +11,7 @@ const libreBodoni = Libre_Bodoni({
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
   variable: "--font-nunito-sans",
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
