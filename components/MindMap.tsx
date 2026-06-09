@@ -63,7 +63,7 @@ const MindMapCard: React.FC<{
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           <div className="absolute bottom-2 left-3">
              <span className="text-white/80 font-sans text-[10px] uppercase tracking-widest">
-              L{index + 1}
+              {String(index + 1).padStart(2, '0')}
             </span>
           </div>
         </div>
@@ -129,23 +129,20 @@ const MindMap: React.FC<{ data: Transcript }> = ({ data }) => {
   };
 
   return (
-    <section className="py-16 bg-[#f8f8f2] border-b border-[var(--primary)]/5">
+    <section className="py-16 bg-[var(--surface)] border-b border-[var(--primary)]/5">
       <div className="w-full max-w-[1200px] mx-auto px-6">
         <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="text-[var(--secondary)] text-xs font-sans uppercase tracking-[0.3em] mb-2">
-              The Dartmouth Archives
-            </h2>
-            <h3 className="text-4xl md:text-5xl font-serif text-[var(--primary)] italic">
+            <h2 className="text-4xl md:text-5xl font-serif text-[var(--primary)] italic mb-2">
               Core Philosophies
-            </h3>
+            </h2>
           </div>
-          <p className="text-[var(--on-background)]/40 font-serif italic text-sm max-w-sm">
+          <p className="text-[var(--on-background)]/60 font-serif italic text-sm max-w-sm leading-relaxed">
             Press clippings and field notes from the legendary address at Dartmouth College.
           </p>
         </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.sections.map((section, index) => (
             <MindMapCard 
               key={index} 

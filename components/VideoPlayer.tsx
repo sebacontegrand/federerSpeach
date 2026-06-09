@@ -40,23 +40,23 @@ export default function VideoPlayer() {
           <div className="flex flex-wrap gap-4 justify-center">
             <button
               onClick={toggleTranscript}
-              className={`px-6 py-3 rounded-md font-sans uppercase tracking-[0.2em] text-[10px] transition-all duration-500 border ${
+              className={`px-5 py-3 rounded-sm font-sans uppercase tracking-[0.2em] text-[10px] transition-all duration-500 border ${
                 isExpanded 
                   ? "bg-black text-white border-black" 
                   : "bg-transparent text-black border-black/10 hover:border-black"
               }`}
             >
-              {isExpanded ? "Close Archive" : "Archival Transcript"}
+              {isExpanded ? "Close" : "Transcript"}
             </button>
             <button
               onClick={toggleSummary}
-              className={`px-6 py-3 rounded-md font-sans uppercase tracking-[0.2em] text-[10px] transition-all duration-500 border ${
+              className={`px-5 py-3 rounded-sm font-sans uppercase tracking-[0.2em] text-[10px] transition-all duration-500 border ${
                 isSummary 
                   ? "bg-black text-white border-black" 
                   : "bg-transparent text-black border-black/10 hover:border-black"
               }`}
             >
-              {isSummary ? "Close Insights" : "Key Lessons"}
+              {isSummary ? "Close" : "Insights"}
             </button>
           </div>
 

@@ -56,10 +56,9 @@ const Thoughts = () => {
               <button
                 type="submit"
                 disabled={submitted}
-                className="w-full py-5 bg-black text-white font-sans uppercase tracking-[0.3em] text-[10px] hover:bg-[var(--secondary)] transition-all duration-500 rounded-sm disabled:bg-gray-400 group relative overflow-hidden"
+                className="w-full py-4 bg-black text-white font-sans uppercase tracking-[0.2em] text-xs hover:bg-[var(--secondary)] transition-all duration-500 rounded-sm disabled:bg-gray-400"
               >
-                <span className="relative z-10">{submitted ? "Archived Successfully" : "Add to Archive"}</span>
-                <div className="absolute inset-0 bg-[var(--secondary)] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                {submitted ? "Sent" : "Add to Archive"}
               </button>
             </form>
           </div>
@@ -71,8 +70,7 @@ const Thoughts = () => {
                { name: "DAVID K.", text: "Effortless is indeed a myth. Your hard work inspired my own journey in coding." },
                { name: "SARAH L.", text: "The backhand of a god, the heart of a champion. Forever the GOAT." }
              ].map((item, idx) => (
-                <div key={idx} className="border-b border-black/5 pb-8 relative group">
-                  <div className="absolute -left-4 top-0 w-1 h-0 bg-[var(--secondary)] group-hover:h-full transition-all duration-500" />
+                <div key={idx} className="border-b border-black/5 pb-8">
                   <p className="text-[var(--primary)] font-serif italic leading-relaxed mb-4 text-lg">
                     &ldquo;{item.text}&rdquo;
                   </p>
